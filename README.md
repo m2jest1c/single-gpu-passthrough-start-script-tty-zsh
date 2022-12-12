@@ -17,7 +17,7 @@ This method also tends to work more reliably for me than hook scripts? Why? I do
 ## How do I use it?
 The script assumes your VM is named `win10`. If it isn't, then either rename the VM to win10 or change the name in the script.
 
-I personally set up an alias in my ~/.zshrc, using a line like `alias startqemuvm="source somepath/start.sh"` 
+I personally set up an alias in my `~/.zshrc`, using a line like `alias startqemuvm="source somepath/start.sh"` 
 and `alias revertqemuvm="source somepath/revert.sh"`. You can just call the script directly using `source` if you want.
 
 I sign out of my DE and then switch to a tty using `Ctrl + Alt + F4` (or some other function key). I then sign in there, 
