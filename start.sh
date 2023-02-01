@@ -14,7 +14,7 @@ else
 	fi
 fi
 echo "Stopping Display Manager, then waiting 5 seconds." && sudo systemctl stop display-manager.service
-`sleep` 5
+sleep 5
 # You can add anything else you want in here, like starting an SMB service for a network drive in your VM.
 echo "Running GPU driver checks."
 if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
