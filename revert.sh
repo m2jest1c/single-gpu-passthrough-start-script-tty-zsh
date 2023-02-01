@@ -15,5 +15,6 @@ else
 fi
 # This one really doesn't do much in its current state. I wrote it initially to restart some services I that I stopped in the start script.
 # You can add your own stuff here, like unmounting drives, starting/stopping services, etc.
+# virsh commands are not included here because it is assumed you are running this script after shutting the VM down, from a tty.
 echo "Starting Display Manager and exiting." && sudo systemctl start display-manager.service
 exit

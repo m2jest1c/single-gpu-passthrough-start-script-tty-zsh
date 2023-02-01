@@ -13,8 +13,8 @@ else
 		exit 33
 	fi
 fi
-echo "Stopping Display Manager." && sudo systemctl stop display-manager.service
-sleep 10
+echo "Stopping Display Manager, then waiting 5 seconds." && sudo systemctl stop display-manager.service
+`sleep` 5
 # You can add anything else you want in here, like starting an SMB service for a network drive in your VM.
 echo "Running GPU driver checks."
 if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
@@ -30,8 +30,7 @@ if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
 		else
 			echo "\nGPU no longer in use."
 			# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
-			echo "Waiting 5 seconds, then booting Windows."
-			sleep 5
+			echo "Booting Windows."
 			virsh start win10
 		fi
 	else
@@ -42,7 +41,6 @@ if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
 	fi
 else
 	# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
-	echo "Waiting 5 seconds, then booting Windows"
-	sleep 5
+	echo "Booting Windows."
 	virsh start win10
 fi
