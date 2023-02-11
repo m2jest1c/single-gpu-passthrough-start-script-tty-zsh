@@ -21,8 +21,8 @@ if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
 	echo "GPU still in use."
 	read -q REPLY\?"Attempt to force kill all processes using the GPU? [Y/n] "
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		sudo lsof -t /dev/dri/renderD128 | xargs -I '{}' sudo kill {}
-		if sudo fuser -s /dev/dri/renderD128 || sudo fuser -s /dev/dri/card0; then
+		sudo lsof -t $(find /dev/dri/ -iname "renderD*") | xargs -I '{}' sudo kill {}
+		if sudo fuser -s $(find /dev/dri/ -iname "renderD*") || sudo fuser -s $(find /dev/dri/ -iname "card*"); then
 			echo "\nGPU still in use, even after force kill. \n\nAborting."
 			read -s -k \?"Press any key to start Display Manager and exit."
 			sudo systemctl start display-manager.service
