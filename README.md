@@ -21,7 +21,6 @@ and `alias revertqemuvm="source somepath/revert.sh"`. You can just call the scri
 I sign out of my DE and then switch to a tty using `Ctrl + Alt + F4` (or some other function key). I then sign in there, 
 and run one of the aliases. 
 
-## I'm not responsible if your computer explodes, your root directory disappears, or anything similar. None of that should happen, but if it does I'm not responsible. You can read the code. 
-
+The script now allows you to choose a VM. You do not need to add the name of your VM in manually.
 
 
