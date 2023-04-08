@@ -16,9 +16,9 @@ fi
 
 # VM chooser. You can add a grep below if you want to only show VMs that match a certain string.
 echo "List of Virtual Machines:"
-virsh list --name --all | nl # | grep "gpu" for example
+virsh list --name --all | nl # | grep "gpu" for example before the nl 
 read "VMN?Enter the number of the virtual machine you want to select: "
-VM=$(virsh list --name --all | sed "${VMN}q;d")
+VM=$(virsh list --name --all | sed "${VMN}q;d") # If you added a grep above, you'll need to add it here as well, before the sed.
 echo "You have chosen $VM."
 
 echo "Stopping Display Manager, then waiting 5 seconds." && sudo systemctl stop display-manager.service
