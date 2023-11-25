@@ -30,25 +30,25 @@ if sudo fuser -s $(find /dev/dri/ -iname "renderD*") || sudo fuser -s $(find /de
 	read "REPLY?Attempt to force kill all processes using the GPU? [Y/n] "
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		sudo lsof -t $(find /dev/dri/ -iname "renderD*") | xargs -I '{}' sudo kill -9 {}
-		if sudo fuser -s $(find /dev/dri/ -iname "renderD*") || sudo fuser -s $(find /dev/dri/ -iname "card*"); then
-			echo "\nGPU still in use, even after force kill. \n\nAborting."
+			if sudo fuser -s $(find /dev/dri/ -iname "renderD*") || sudo fuser -s $(find /dev/dri/ -iname "card*"); then
+				echo "\nGPU still in use, even after force kill. \n\nAborting."
+				read -s -k \?"Press any key to start Display Manager and exit."
+				sudo systemctl start display-manager.service
+				{ exit 1; }
+			else
+				echo "\nGPU no longer in use."
+				# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
+				echo "Booting VM."
+				virsh start $VM
+			fi
+		else
+			echo "\nAborting."
 			read -s -k \?"Press any key to start Display Manager and exit."
 			sudo systemctl start display-manager.service
 			{ exit 1; }
-		else
-			echo "\nGPU no longer in use."
-			# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
-			echo "Booting VM."
-			virsh start $VM
 		fi
 	else
-		echo "\nAborting."
-		read -s -k \?"Press any key to start Display Manager and exit."
-		sudo systemctl start display-manager.service
-		{ exit 1; }
-	fi
-else
-	# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
-	echo "Booting VM."
-	virsh start $VM
+		# You can add services, drive mounts, etc here as well. Make sure to add them in the other places this comment is placed as well.
+		echo "Booting VM."
+		virsh start $VM
 fi
